@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
 
+
 import { getQuote } from '../Api'
+
+const style = {
+  width: "50%"
+}
 
 class App extends Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
-      quote: "",
+      quote: ""
     }
+
     this.setQuote = this.setQuote.bind(this)
     this.handleOnClick = this.handleOnClick.bind(this)
+    //this.style = {styling}      this. refers to the class.
   }
   handleOnClick(e) {
     getQuote(this.setQuote)
   }
 
   setQuote(err, quoted) {
-    this.setState({ quote: quoted }, () => console.log('setquote', quoted))
+    if (!err) {
+      this.setState({ 'quote': quoted.value })
+    } else (console.log('quote not recieved'))
+
   }
 
   render() {
@@ -26,14 +37,18 @@ class App extends Component {
         <div className='title'><h1> Tronald Dump Quote Generator</h1></div>
         <div className='trump-button'>
           <button onClick={this.handleOnClick}>
-            <g src='./ronaldo-dumpster.svg' />
+            <img src="./Tronald_Dump.png" alt="FFS!!!" style={style} />
+            {/*this would ebcome this.style*/}
           </button>
         </div>
-        <div className='quote'>
-          <p>
+        {this.state.quote && <div className='quote'>
+          <p key={1}>
             {this.state.quote}
           </p>
-        </div>
+          <p>
+            - Tronald Dump
+          </p>
+        </div>}
 
       </div >
     )

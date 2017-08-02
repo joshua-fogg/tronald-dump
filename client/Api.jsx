@@ -9,10 +9,12 @@ export function getQuote(callback) {
         .set(tronaldKey)
         .set('Accept', 'application/json')
         .end((err, res) => {
+            console.log(res.body)
             if (err) {
                 callback(err)
             } else {
-                callback(null, res.body)
+                return callback(null, res.body)
             }
+
         })
 }
